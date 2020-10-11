@@ -1,3 +1,4 @@
+<mat-progress-bar mode="determinate" value="{{progress_value}}"></mat-progress-bar>
 <section class="mt-5">
   <div class="container-fluid">
     <div class="row">
@@ -102,10 +103,10 @@
         <mat-card class="example-card" *ngIf="view_data">
           <mat-card-header>
             <mat-card-title>{{view_data.name | uppercase}}    {{view_data.lastname | uppercase}}</mat-card-title>
-            <mat-card-subtitle>{{view_data.age}}</mat-card-subtitle>
+            <mat-card-subtitle>Age: {{view_data.age}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p>{{view_data.address}}</p>
+            <p>Address: {{view_data.address}}</p>
           </mat-card-content>
         </mat-card>
       </div>

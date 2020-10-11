@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   view_data;
   update_data=false;
   update_id;
+  progress_value=0;
   constructor(private userFB: FormBuilder, private ref:ChangeDetectorRef,private dataservice: DataService) { }
 
   ngOnInit() {
@@ -59,12 +60,16 @@ export class DashboardComponent implements OnInit {
     if(this.Form_body.length==10){
         this.hide_form=true;
     }
+    this.progress_value=parseInt(this.Form_body.length+'0');
     this.dataSource = new MatTableDataSource(this.Form_body);
+    this.DataForm.reset();
   }
   //delete
   onDelete(id){
-    console.log(id);
+   
     this.Form_body.splice(id, 1);
+    console.log(this.Form_body);
+    this.progress_value=(this.progress_value-10);
     this.dataSource = new MatTableDataSource(this.Form_body);
     this.view_data=null;
   }
