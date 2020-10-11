@@ -1,0 +1,164 @@
+<section class="mt-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef> lastname </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+          </ng-container>
+
+          <!-- age Column -->
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef> age </th>
+            <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+          </ng-container>
+          <!-- address Column -->
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> address </th>
+            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="primary" matTooltip="View" (click)="onview(element)">
+                <mat-icon>visibility</mat-icon>
+              </button>&nbsp;
+              <button mat-icon-button color="primary" matTooltip="View" (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button>&nbsp;
+              <button mat-icon-button color="primary"
+                matTooltip="Delete" (click)="onDelete(element.id)">
+                <mat-icon>delete</mat-icon>
+              </button>&nbsp;
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <div class="col-md-6" *ngIf="!hide_form">
+        <form [formGroup]="DataForm" (ngSubmit)="SaveDetails()">
+          <div class="text-center">
+            <p style="color: #dc3545;">ADD DETAILS</p>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput placeholder="Enter First Name" formControlName="name" required />
+                <mat-error> Name is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput placeholder="Enter Last Name" formControlName="lastname" required />
+                <mat-error> Last name is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput placeholder="Enter address" formControlName="address" />
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input type="number" matInput placeholder="Enter Age" formControlName="age" required />
+                <mat-error> Age is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div class="row text-right">
+                <div class="col-lg-12">
+                  <button type="button" mat-raised-button color="primary" (click)="SaveDetails()"
+                    matTooltip="Save changes">
+                    SAVE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-md-6">
+        <mat-card class="example-card" *ngIf="view_data">
+          <mat-card-header>
+            <mat-card-title>{{view_data.name | uppercase}}    {{view_data.lastname | uppercase}}</mat-card-title>
+            <mat-card-subtitle>{{view_data.age}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{view_data.address}}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-6" *ngIf="update_data">
+        <form [formGroup]="DataUpdateForm" (ngSubmit)="UpdateDetails()">
+          <div class="text-center">
+            <p style="color: #dc3545;">UPDATE DETAILS</p>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput placeholder="Enter First Name" formControlName="name" required />
+                <mat-error> Name is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput placeholder="Enter Last Name" formControlName="lastname" required />
+                <mat-error> Last name is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput placeholder="Enter address" formControlName="address" />
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+              <mat-form-field class="mat-form-field-fluid">
+                <input type="number" matInput placeholder="Enter Age" formControlName="age" required />
+                <mat-error> Age is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div class="row text-right">
+                <div class="col-lg-12">
+                  <button type="button" mat-raised-button color="primary" (click)="UpdateDetails()"
+                    matTooltip="Update changes">
+                    UPDATE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
