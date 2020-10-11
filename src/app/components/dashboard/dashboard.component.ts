@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { DataService } from '../../services/data.service';
 import {MatTableDataSource} from '@angular/material/table';
 
 export interface MyData {
@@ -26,7 +25,7 @@ export class DashboardComponent implements OnInit {
   update_data=false;
   update_id;
   progress_value=0;
-  constructor(private userFB: FormBuilder, private ref:ChangeDetectorRef,private dataservice: DataService) { }
+  constructor(private userFB: FormBuilder, private ref:ChangeDetectorRef) { }
 
   ngOnInit() {
     this.DataForm = this.userFB.group({
